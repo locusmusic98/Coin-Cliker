@@ -3,188 +3,216 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Coin Clicker — prototyp</title>
+  <title>Coin Clicker — Locus Games</title>
 
   <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6171775532859342"
      crossorigin="anonymous"></script>
+
+  <style>
+    :root {
+      --bg: #07112b;
+      --card: #0d1220;
+      --accent: #ffcc00;
+      --text: #e6eef8;
+      --muted: #9aa7bf;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Roboto, Arial;
+      background: linear-gradient(180deg, #07112b, #0a1738);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    header {
+      width: 100%;
+      max-width: 960px;
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    main {
+      background: var(--card);
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+      text-align: center;
+      max-width: 900px;
+    }
+
+    #coinBtn {
+      background: var(--accent);
+      border: none;
+      border-radius: 50%;
+      width: 200px;
+      height: 200px;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #000;
+      margin: 10px;
+      transition: transform 0.1s ease-in-out;
+    }
+
+    #coinBtn:active {
+      transform: scale(0.95);
+    }
+
+    .stats {
+      font-size: 16px;
+      margin-top: 12px;
+    }
+
+    .shop {
+      margin-top: 24px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 12px;
+      border-radius: 10px;
+    }
+
+    .upgrade {
+      background: #182238;
+      padding: 10px;
+      border-radius: 8px;
+      display: inline-block;
+      margin: 8px;
+    }
+
+    .upgrade button {
+      background: var(--accent);
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    footer {
+      margin: 20px 0;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    section.info {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 800px;
+      margin-top: 40px;
+      line-height: 1.6;
+    }
+
+    section.info h2 {
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    section.info a {
+      color: var(--accent);
+    }
+
+    button#backToGame {
+      margin-top: 12px;
+      background: var(--accent);
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
 </head>
-<style>
-  :root{--bg:#0f1724;--card:#0b1220;--accent:#ffcc00;--muted:#9aa7bf}
-  body{margin:0;font-family:Segoe UI,Roboto,Arial;background:linear-gradient(180deg,#071126 0%,#071a2b 100%);color:#e6eef8;display:flex;flex-direction:column;min-height:100vh;align-items:center;padding:20px}
-  header{width:100%;max-width:900px;display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
-  .brand{font-weight:700;font-size:20px;color:var(--accent)}
-  .ad-banner{width:320px;height:50px;background:#263343;border:2px dashed #3b5165;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px;border-radius:6px}
-  main{width:100%;max-width:900px;background:var(--card);padding:18px;border-radius:12px;box-shadow:0 8px 30px rgba(2,6,23,.6)}
-  .top{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
-  .play{flex:1;display:flex;flex-direction:column;align-items:center;padding:20px;border-radius:10px;background:linear-gradient(180deg,rgba(255,255,255,.02),transparent)}
-  #coinBtn{width:220px;height:220px;border-radius:50%;border:6px solid rgba(255,204,0,.15);background:radial-gradient(circle at 30% 30%, #ffd84d, #ffbe00);font-size:28px;font-weight:700;color:#101212;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 30px rgba(255,190,0,.12)}
-  .stats{margin-top:14px;display:flex;gap:12px}
-  .stat{background:rgba(255,255,255,.03);padding:8px 12px;border-radius:8px;color:var(--muted);font-size:14px}
-  .upgrades{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
-  .upgrade{background:#071b2b;padding:10px;border-radius:8px;min-width:150px}
-  .footer{display:flex;justify-content:space-between;align-items:center;margin-top:12px;color:var(--muted);font-size:13px}
-  footer small{color:var(--muted)}
-  .ad-spot{margin-left:auto}
-  /* modal interstitial simulation */
-  .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(2,6,23,.6)}
-  .modal .card{width:320px;background:#0b1220;padding:18px;border-radius:12px;text-align:center}
-  .btn{background:var(--accent);color:#081020;padding:8px 12px;border-radius:8px;border:none;cursor:pointer;font-weight:700}
-  .small{font-size:13px;color:var(--muted)}
-</style>
-</head>
+
 <body>
+  <header>
+    <h1>Coin Clicker (Locus Games)</h1>
+    <small>Klikaj, ulepszaj i zdobywaj coraz więcej monet!</small>
+  </header>
 
-<header>
-  <div class="brand">Coin Clicker (prototyp)</div>
-  <!-- AD BANNER PLACEHOLDER: Tutaj wkleisz kod banera z AdSense / innej sieci reklamowej.
-       Zastąp zawartość <div class="ad-banner">...</div> kodem reklamy -->
-  <div class="ad-banner" id="top-ad">MIEJSCE NA REKLAMĘ 320×50</div>
-</header>
-
-<main>
-  <div class="top">
-    <div class="play">
-      <button id="coinBtn">Kliknij</button>
-      <div class="stats" style="margin-top:10px">
-        <div class="stat">Monety: <span id="coins">0</span></div>
-        <div class="stat">Kliknięć: <span id="clicks">0</span></div>
-        <div class="stat">Auto: <span id="auto">0</span>/s</div>
-      </div>
-
-      <div class="upgrades" id="upgrades">
-        <!-- Generowane dynamicznie -->
-      </div>
-
-      <div style="margin-top:12px">
-        <button id="showAdBtn" class="btn">Pokaż symulowaną reklamę (test)</button>
-      </div>
+  <main id="game">
+    <button id="coinBtn">Kliknij</button>
+    <div class="stats">
+      Monety: <span id="coins">0</span> | Kliknięć: <span id="clicks">0</span> | Auto: <span id="auto">0</span>/s
     </div>
 
-    <aside style="width:260px">
-      <div style="background:linear-gradient(180deg,#071826,#07263a);padding:12px;border-radius:10px;">
-        <div style="font-weight:700">Sklep ulepszeń</div>
-        <div class="small" style="margin-top:8px">Kup ulepszenia, by zwiększyć zysk. Idealne miejsce na reklamy między poziomami.</div>
-        <div style="height:12px"></div>
-        <div style="background:rgba(255,255,255,.02);padding:8px;border-radius:8px;">
-          <div>Osobny pasek reklam (np. 300×250)</div>
-          <div style="height:12px"></div>
-          <div class="ad-banner" style="height:250px;width:100%;border-radius:8px">300×250 REKLAMA</div>
-        </div>
+    <div class="shop">
+      <h3>Sklep ulepszeń</h3>
+      <div class="upgrade">
+        <p>+1/s Auto — <b>50 monet</b></p>
+        <button onclick="buyAuto()">Kup</button>
       </div>
-    </aside>
-  </div>
+      <div class="upgrade">
+        <p>Podwójne kliknięcie — <b>300 monet</b></p>
+        <button onclick="buyDouble()">Kup</button>
+      </div>
+    </div>
+  </main>
 
-  <div class="footer">
-    <div class="small">Prototyp — reklamy wymagają konta AdSense/AdMob.</div>
-    <div class="small">Zyski zależą od ruchu i kraju użytkowników.</div>
-  </div>
-</main>
+  <section class="info">
+    <h2>O grze</h2>
+    <p><b>Coin Clicker</b> to prosta gra przeglądarkowa stworzona przez <b>Locus Games</b>. Twoim celem jest klikanie w monetę, aby zdobywać punkty i rozwijać swoje ulepszenia. Projekt powstał jako zabawny eksperyment z tworzeniem prostych gier HTML5.</p>
+    <p>Gra nie zbiera danych osobowych ani nie wymaga logowania. Po zatwierdzeniu przez Google AdSense, na stronie mogą pojawiać się reklamy wspierające rozwój projektu.</p>
+  </section>
 
-<!-- Modal służący do symulacji interstitial -->
-<div class="modal" id="modal">
-  <div class="card">
-    <div style="font-weight:700;margin-bottom:8px">Symulowana reklama pełnoekranowa</div>
-    <div class="small" style="margin-bottom:12px">W tym miejscu będzie prawdziwa reklama interstitial (użytkownik musi mieć kod od sieci reklamowej).</div>
-    <button id="closeModal" class="btn">Zamknij reklamę</button>
-  </div>
-</div>
+  <section class="info">
+    <h2>Polityka prywatności</h2>
+    <p>Serwis Coin Clicker nie gromadzi żadnych danych osobowych użytkowników. W przyszłości mogą być wyświetlane reklamy Google AdSense, które wykorzystują pliki cookie do personalizacji treści reklam. Użytkownik może zarządzać zgodami dotyczącymi reklam za pomocą ustawień swojego konta Google.</p>
+    <p>Więcej o zasadach prywatności Google: <a href="https://policies.google.com/privacy?hl=pl" target="_blank">Kliknij tutaj</a>.</p>
+    <button id="backToGame" onclick="scrollTo(0, 0)">Powrót do gry</button>
+  </section>
 
-<script>
-  // Prosta logika clickera
-  let coins = 0;
-  let clicks = 0;
-  let auto = 0;
-  const coinsEl = document.getElementById('coins');
-  const clicksEl = document.getElementById('clicks');
-  const autoEl = document.getElementById('auto');
-  const coinBtn = document.getElementById('coinBtn');
-  const upgradesContainer = document.getElementById('upgrades');
+  <footer>
+    © 2025 Locus Games — Wszystkie prawa zastrzeżone.
+  </footer>
 
-  // Definicja ulepszeń
-  const upgrades = [
-    { id:'u1', name:'+1/s Auto', cost:50, auto:1 },
-    { id:'u2', name:'+5/s Auto', cost:300, auto:5 },
-    { id:'u3', name:'Podwójne kliknięcie', cost:800, multiplier:2 }
-  ];
+  <script>
+    let coins = 0;
+    let clicks = 0;
+    let auto = 0;
+    let doubleClick = false;
 
-  let clickValue = 1;
-  let owned = {};
+    const coinsEl = document.getElementById("coins");
+    const clicksEl = document.getElementById("clicks");
+    const autoEl = document.getElementById("auto");
 
-  function renderUpgrades(){
-    upgradesContainer.innerHTML = '';
-    upgrades.forEach(u=>{
-      const ownedCount = owned[u.id] || 0;
-      const div = document.createElement('div');
-      div.className = 'upgrade';
-      div.innerHTML = '<div style="font-weight:700">'+u.name+'</div>'+
-                      '<div class="small">Koszt: '+u.cost+' monet</div>'+
-                      '<div style="height:8px"></div>'+
-                      '<button style="margin-top:8px;padding:8px;border-radius:8px;cursor:pointer" onclick="buyUpgrade(\''+u.id+'\')">Kup</button>'+
-                      (ownedCount?'<div class="small" style="margin-top:6px">Posiadane: '+ownedCount+'</div>':'');
-      upgradesContainer.appendChild(div);
+    document.getElementById("coinBtn").addEventListener("click", () => {
+      let gain = doubleClick ? 2 : 1;
+      coins += gain;
+      clicks++;
+      updateUI();
     });
-  }
 
-  function buyUpgrade(id){
-    const u = upgrades.find(x=>x.id===id);
-    if(!u) return;
-    if(coins >= u.cost){
-      coins -= u.cost;
-      owned[id] = (owned[id]||0) + 1;
-      if(u.auto) { auto += u.auto; autoEl.textContent = auto; }
-      if(u.multiplier) { clickValue *= (u.multiplier||1); }
-      // zwiększamy koszt przy każdym zakupie
-      u.cost = Math.floor(u.cost * 1.6);
-      update();
-    } else {
-      alert('Za mało monet!');
+    function buyAuto() {
+      if (coins >= 50) {
+        coins -= 50;
+        auto++;
+        updateUI();
+      }
     }
-  }
 
-  coinBtn.addEventListener('click', ()=>{
-    clicks++;
-    coins += clickValue;
-    clicksEl.textContent = clicks;
-    update();
-  });
+    function buyDouble() {
+      if (coins >= 300 && !doubleClick) {
+        coins -= 300;
+        doubleClick = true;
+        updateUI();
+      }
+    }
 
-  function update(){
-    coinsEl.textContent = coins;
-    clicksEl.textContent = clicks;
-    autoEl.textContent = auto;
-    renderUpgrades();
-  }
+    function updateUI() {
+      coinsEl.textContent = coins;
+      clicksEl.textContent = clicks;
+      autoEl.textContent = auto;
+    }
 
-  // Auto przychód co 1s
-  setInterval(()=>{
-    if(auto>0){
+    setInterval(() => {
       coins += auto;
-      update();
-    }
-  }, 1000);
-
-  // Inicjalizacja
-  renderUpgrades();
-  update();
-
-  // Symulacja interstitialu (test)
-  const modal = document.getElementById('modal');
-  document.getElementById('showAdBtn').addEventListener('click', ()=> {
-    modal.style.display = 'flex';
-  });
-  document.getElementById('closeModal').addEventListener('click', ()=> {
-    modal.style.display = 'none';
-  });
-
-  // --- MIEJSCE NA KOD REKLAMOWY ---
-  // Aby wstawić prawdziwy baner AdSense:
-  // 1) Załóż konto AdSense i dodaj swoją stronę.
-  // 2) W panelu AdSense wygeneruj kod reklamy (np. responsive albo 320x50).
-  // 3) Zastąp <div id="top-ad">...</div> powyżej kodem z AdSense.
-  //
-  // Podobnie dla interstitial (AdMob/UnityAds) w aplikacjach mobilnych — musisz użyć SDK i kluczy z Twojego konta.
-</script>
-
+      updateUI();
+    }, 1000);
+  </script>
 </body>
 </html>
